@@ -1,19 +1,33 @@
+
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Todo List</title>
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Todo List</title>
+
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
+
+<div class="box">
   <h1>Todo List</h1>
-  
-  <input id="todo-input" placeholder="Add todo..." />
-  <button id="add-btn">Add</button>
-  <ul id="todo-list"></ul>
-  <script type="module" src="js/todo.js"></script>
-  <script type="module" src="js/firebase.js"></script>
+  <p class="count" id="inbox">0 Tasks</p>
+
+  <div class="row">
+    <input id="todoInput" placeholder="Add new task..." />
+    <button class="btn green" id="mainBtn">Add</button>
+  </div>
+
+  <button class="btn red full" id="deleteAllBtn">Delete All</button>
+
+  <ul id="list"></ul>
+
+  <div class="connect">connect firebase</div>
+</div>
+
+<script type="module" src="firebase.mjs"></script>
+<script type="module" src="todo.js"></script>
 
 </body>
 </html>
