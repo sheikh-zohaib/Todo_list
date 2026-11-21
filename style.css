@@ -83,3 +83,17 @@ border: none;
 padding: 10px 12px;
 font-size: 18px;
 }
+
+#list li {
+position: relative;
+}
+
+#list li.done::after {
+content: "";
+position: absolute;
+left: 0;
+right: 0;
+top: 50%;
+height: 4px;
+background-color: black;
+}
