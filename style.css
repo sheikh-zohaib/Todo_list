@@ -1,77 +1,85 @@
 body {
-background-color: lightblue;
+background-color: #fffacd;
 font-family: Arial;
+margin: 0;
 }
 
 .main {
-background-color: #154360;
 width: 400px;
-margin: 80px auto;
-padding: 20px;
-border-radius: 10px;
-color: white;
+margin: 30px auto;
+padding: 10px;
 }
 
 .main h1 {
-font-size: 30px;
+font-size: 38px;
+color: black;
 }
 
 #todoInp {
-padding: 8px;
-width: 250px;
+padding: 10px;
+width: 270px;
+font-size: 18px;
+border: 2px solid black;
 border-radius: 5px;
-border: none;
 }
 
 #addBtn {
-padding: 8px 15px;
-background-color: green;
+padding: 10px 15px;
+background-color: #006400;
 color: white;
 border: none;
-border-radius: 5px;
+font-size: 18px;
+margin-left: 5px;
 }
 
 #delAllBtn {
-padding: 8px 15px;
-background-color: green;
+padding: 10px 15px;
+background-color: #006400;
 color: white;
 border: none;
-border-radius: 5px;
-width: 100%;
+font-size: 18px;
 }
 
 #list {
 list-style: none;
 padding: 0;
+margin-top: 15px;
 }
 
 #list li {
-background-color: white;
-color: black;
+background-color: #eef4ee;
 padding: 10px;
 margin-top: 10px;
-border-radius: 5px;
 display: flex;
 gap: 10px;
 align-items: center;
+border-left: 5px solid #006400;
 }
 
 #list li span {
 flex: 1;
+font-size: 32px;
+font-weight: bold;
+color: black;
+}
+
+#list li input {
+width: 22px;
+height: 22px;
 }
 
 .delBtn {
-background-color: green;
+background-color: #006400;
 color: white;
 border: none;
-border-radius: 5px;
-padding: 5px 10px;
+padding: 10px 12px;
+font-size: 18px;
 }
 
 .editBtn {
-background-color: green;
+background-color: #006400;
 color: white;
 border: none;
-border-radius: 5px;
-padding: 5px 10px;
+padding: 10px 12px;
+font-size: 18px;
 }
