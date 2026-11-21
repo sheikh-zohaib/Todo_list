@@ -47,6 +47,7 @@ todoInp.value = text;
 addBtn.innerHTML = "Update";
 }
 
+
 function tickTodo(box) {
 var li = box.parentElement;
 var span = li.querySelector("span");
@@ -54,14 +55,14 @@ var delBtn = li.querySelector(".delBtn");
 var editBtn = li.querySelector(".editBtn");
 
 if (box.checked) {
-span.style.textDecoration = "line-through";
+li.classList.add("done");
 span.style.color = "green";
 delBtn.disabled = true;
 editBtn.disabled = true;
 delBtn.style.opacity = "0.3";
 editBtn.style.opacity = "0.3";
 } else {
-span.style.textDecoration = "none";
+li.classList.remove("done");
 span.style.color = "black";
 delBtn.disabled = false;
 editBtn.disabled = false;
