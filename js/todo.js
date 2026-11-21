@@ -1,36 +1,73 @@
-import { db } from "./firebase.js";
-import { collection, addDoc, getDocs, deleteDoc, doc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+import { db, collection, addDoc, getDocs, deleteDoc, doc, updateDoc, onSnapshot, query, orderBy } from "./firebase.mjs";
 
-const input = document.getElementById("todo-input");
-const list = document.getElementById("todo-list");
-const addBtn = document.getElementById("add-btn");
+var input = document.getElementById("todoInput");
+var mainBtn = document.getElementById("mainBtn");
+var list = document.getElementById("list");
+var inbox = document.getElementById("inbox");
 
-async function getTodos() {
-  list.innerHTML = "";
-  const querySnapshot = await getDocs(collection(db, "todos"));
-  querySnapshot.forEach((docItem) => {
-    const li = document.createElement("li");
-    li.innerHTML = `
-      <span>${docItem.data().text}</span>
-      <button onclick="deleteTodo('${docItem.id}')">Delete</button>
-    `;
-    list.appendChild(li);
-  });
-}
+var editId = null;
+var todosRef = collection(db, "todos");
 
-async function addTodo() {
-  if (input.value === "") return;
-  await addDoc(collection(db, "todos"), {
-    text: input.value
-  });
+mainBtn.onclick = function () {
+  var value = input.value.trim();
+  if (value == "") {
+    return;
+  }
+
+  if (editId) {
+    updateDoc(doc(db, "todos", editId), {
+      text: value
+    });
+    editId = null;
+    mainBtn.innerText = "Add";
+  } else {
+    addDoc(todosRef, {
+      text: value,
+      createdAt: Date.now()
+    });
+  }
+
   input.value = "";
-  getTodos();
+};
+
+document.getElementById("deleteAllBtn").onclick = async function () {
+  var snap = await getDocs(todosRef);
+  snap.forEach(function (d) {
+    deleteDoc(doc(db, "todos", d.id));
+  });
+};
+
+function deleteTodo(id) {
+  deleteDoc(doc(db, "todos", id));
 }
 
-window.deleteTodo = async function(id) {
-  await deleteDoc(doc(db, "todos", id));
-  getTodos();
+function copyTodo(text) {
+  navigator.clipboard.writeText(text);
 }
 
-addBtn.addEventListener("click", addTodo);
-getTodos();
+function editTodo(id, text) {
+  editId = id;
+  input.value = text;
+  mainBtn.innerText = "Update";
+  input.focus();
+}
+
+onSnapshot(query(todosRef, orderBy("createdAt", "desc")), function (snap) {
+  list.innerHTML = "";
+  inbox.innerText = snap.size + " Tasks";
+
+  snap.forEach(function (d) {
+    var data = d.data();
+
+    list.innerHTML += `
+      <li>
+        <span>${data.text}</span>
+        <div class="btn-row">
+          <button class="btn orange small" onclick="editTodo('${d.id}', '${data.text}')">Edit</button>
+          <button class="btn blue small" onclick="copyTodo('${data.text}')">Copy</button>
+          <button class="btn red small" onclick="deleteTodo('${d.id}')">Delete</button>
+        </div>
+      </li>
+    `;
+  });
+});
