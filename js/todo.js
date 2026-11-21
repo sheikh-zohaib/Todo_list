@@ -8,26 +8,29 @@ var inbox = document.getElementById("inbox");
 var editId = null;
 var todosRef = collection(db, "todos");
 
-mainBtn.onclick = function () {
+mainBtn.onclick = async function () {
   var value = input.value.trim();
   if (value == "") {
     return;
   }
 
-  if (editId) {
-    updateDoc(doc(db, "todos", editId), {
-      text: value
-    });
-    editId = null;
-    mainBtn.innerText = "Add";
-  } else {
-    addDoc(todosRef, {
-      text: value,
-      createdAt: Date.now()
-    });
+  try {
+    if (editId) {
+      await updateDoc(doc(db, "todos", editId), {
+        text: value
+      });
+      editId = null;
+      mainBtn.innerText = "add";
+    } else {
+      await addDoc(todosRef, {
+        text: value,
+        createdAt: Date.now()
+      });
+    }
+    input.value = "";
+  } catch (e) {
+    alert("Error: " + e.message);
   }
-
-  input.value = "";
 };
 
 document.getElementById("deleteAllBtn").onclick = async function () {
@@ -41,16 +44,15 @@ function deleteTodo(id) {
   deleteDoc(doc(db, "todos", id));
 }
 
-function copyTodo(text) {
-  navigator.clipboard.writeText(text);
-}
-
 function editTodo(id, text) {
   editId = id;
   input.value = text;
   mainBtn.innerText = "Update";
   input.focus();
 }
+
+window.deleteTodo = deleteTodo;
+window.editTodo = editTodo;
 
 onSnapshot(query(todosRef, orderBy("createdAt", "desc")), function (snap) {
   list.innerHTML = "";
@@ -60,13 +62,11 @@ onSnapshot(query(todosRef, orderBy("createdAt", "desc")), function (snap) {
     var data = d.data();
 
     list.innerHTML += `
-      <li>
-        <span>${data.text}</span>
-        <div class="btn-row">
-          <button class="btn orange small" onclick="editTodo('${d.id}', '${data.text}')">Edit</button>
-          <button class="btn blue small" onclick="copyTodo('${data.text}')">Copy</button>
-          <button class="btn red small" onclick="deleteTodo('${d.id}')">Delete</button>
-        </div>
+      <li class="task-item">
+        <input type="checkbox" class="task-checkbox">
+        <span class="task-text">${data.text}</span>
+        <button class="delete-btn" onclick="deleteTodo('${d.id}')">del</button>
+        <button class="edit-btn" onclick="editTodo('${d.id}', '${data.text}')">edit</button>
       </li>
     `;
   });
