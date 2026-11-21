@@ -1,9 +1,8 @@
-
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc, updateDoc, onSnapshot, query, orderBy } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyC1OO3mq1Ev0ns0oS-rQ0XPUqDQDzU1Lk4",
+  apiKey: "AIzaSyC1003mq1Ev0ns0oS-rQ0XPUqDQDzU1Lk4",
   authDomain: "data-base-5db50.firebaseapp.com",
   projectId: "data-base-5db50",
   storageBucket: "data-base-5db50.firebasestorage.app",
