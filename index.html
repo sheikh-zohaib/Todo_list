@@ -1,33 +1,33 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Todo List</title>
+<title>To Do List</title>
 
 <link rel="stylesheet" href="style.css">
+
 </head>
 <body>
 
-<div class="box">
-  <h1>Todo List</h1>
-  <p class="count" id="inbox">0 Tasks</p>
+<div class="todo-container">
+  <h1 class="todo-title">To Do List</h1>
+  <p class="task-count" id="inbox">0 Tasks</p>
 
-  <div class="row">
-    <input id="todoInput" placeholder="Add new task..." />
-    <button class="btn green" id="mainBtn">Add</button>
+  <div class="input-group">
+    <input id="todoInput" type="text" placeholder="enter the name" class="task-input">
+    <button id="mainBtn" class="add-btn">add</button>
   </div>
 
-  <button class="btn red full" id="deleteAllBtn">Delete All</button>
+  <button id="deleteAllBtn" class="delete-all-btn">delete all</button>
 
-  <ul id="list"></ul>
+  <ul id="list" class="task-list"></ul>
 
-  <div class="connect">connect firebase</div>
+  <div class="firebase-status">connect firebase</div>
 </div>
 
-<script type="module" src="firebase.js"></script>
 <script type="module" src="todo.js"></script>
+script type="module"src="firebase.js"></script>
 
 </body>
 </html>
