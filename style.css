@@ -1,0 +1,77 @@
+body {
+background-color: lightblue;
+font-family: Arial;
+}
+
+.main {
+background-color: #154360;
+width: 400px;
+margin: 80px auto;
+padding: 20px;
+border-radius: 10px;
+color: white;
+}
+
+.main h1 {
+font-size: 30px;
+}
+
+#todoInp {
+padding: 8px;
+width: 250px;
+border-radius: 5px;
+border: none;
+}
+
+#addBtn {
+padding: 8px 15px;
+background-color: green;
+color: white;
+border: none;
+border-radius: 5px;
+}
+
+#delAllBtn {
+padding: 8px 15px;
+background-color: green;
+color: white;
+border: none;
+border-radius: 5px;
+width: 100%;
+}
+
+#list {
+list-style: none;
+padding: 0;
+}
+
+#list li {
+background-color: white;
+color: black;
+padding: 10px;
+margin-top: 10px;
+border-radius: 5px;
+display: flex;
+gap: 10px;
+align-items: center;
+}
+
+#list li span {
+flex: 1;
+}
+
+.delBtn {
+background-color: green;
+color: white;
+border: none;
+border-radius: 5px;
+padding: 5px 10px;
+}
+
+.editBtn {
+background-color: green;
+color: white;
+border: none;
+border-radius: 5px;
+padding: 5px 10px;
+}
